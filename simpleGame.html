@@ -68,23 +68,23 @@
 					}
 				}
 			}
-			function crossOrNot(cell) {			
-				if (cell.innerHTML === "X"){				
-					cell.innerHTML = 0;				
-				}
-				else {
-					cell.innerHTML = "X";
-				}
+			function crossOrNot(cell) {		
+				cell.innerHTML = cell.innerHTML === "X" ? 0 : "X";				
 			}
 			
 			function checkGame(table) {			
 					var rows = table.getElementsByTagName("tr");
-					for (i = 0; i < rows.length; i++) {
-						var currentRow = table.rows[i].getElementsByTagName("td");
-						
-						if(currentRow[0].innerHTML, currentRow[1].innerHTML === "X")
-						{
-							alert("endgame");
+					var cLength = rows.length;
+					var x = 2; //Number of X's that have to be adjacent (2 means 3 X's)
+					for (j = 0; j < cLength - x; j++)
+					{					
+						for (i = 0; i < rows.length - x; i++) {						
+							var currentRow = table.rows[j].getElementsByTagName("td");
+							
+							if(currentRow[i].innerHTML && currentRow[i+1].innerHTML && currentRow[i+2].innerHTML === "X")
+							{
+								alert("endgame");
+							}
 						}
 					}
 				}
