@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>JS Matrices</title>
+        
+    </head>
+    <body>
+    
+    </body>
+	<script type="text/javascript">
+        //<![CDATA[
+            function Matrix() {
+                this.rows = new Array();
+                this.tableAsString = function() {
+                    var temp = "";
+                    for ( var i = 0; i < this.rows.length; ++i ) {
+                        temp += this.rows[i];
+                        if ( i < this.rows.length - 1 ) {
+                            temp += "\n";
+                        }
+					
+                    }					
+                    return temp;
+                };
+                this.width = function() {
+                    return this.rows[0].length;
+                };
+                this.height = function() {
+                    return this.rows.length;
+                };
+                this.asTableElement = function(w,h,t,p,s,b,a) {
+                    var table = document.createElement("table");					
+                    table.style.width = w;
+                    table.style.height = h;
+                    table.style.textAlign = a;
+                    var caption = document.createElement("caption");
+                    caption.appendChild( document.createTextNode(t) );
+                    table.appendChild( caption );
+                    table.setAttribute("cellspacing", s );
+                    table.setAttribute("cellpadding", p);
+                    table.setAttribute("border", b );
+					table.setAttribute("id", "tableId");					
+                    for ( var i = 0; i < this.rows.length; ++i ) {
+                        var tr = document.createElement("tr");
+						tr.setAttribute("id", "link");
+                        for ( var z = 0; z < this.rows[i].length; ++z ) {
+                            var td = document.createElement("td");
+                            td.appendChild( document.createTextNode( this.rows[i][z] ) );
+                            tr.appendChild( td );
+                        }
+                        table.appendChild( tr );
+                    }
+                    return table;
+                };
+            }
+			function addCellHandlers(tId, fClickHandler) {			
+				var table = document.getElementById(tId);
+				var rows = table.getElementsByTagName("tr");
+				for (i = 0; i < rows.length; i++) {
+					var currentRow = table.rows[i].getElementsByTagName("td");					
+					for (j = 0; j < currentRow.length; j++)
+					{
+						currentRow[j].onclick = crossOrNot(currentRow[j], table);						
+					}
+				}
+			}
+			function crossOrNot(cell, table) {
+				return function() {
+					if (cell.innerHTML === "X"){				
+						cell.innerHTML = 0;				
+						}
+					else {
+						cell.innerHTML = "X";
+						}
+						//alert(tId);
+					checkGame(table);
+				}
+			}
+			function checkGame(table) {
+			
+					var rows = table.getElementsByTagName("tr");
+					for (i = 0; i < rows.length; i++) {
+						var currentRow = table.rows[i];
+						
+						if(currentRow[0] === "X")
+						{
+							alert("endgame");
+						}
+					}
+				}
+            window.onload = function() {
+                var m = new Matrix();
+				for(var i=0; i<5;i++)
+				{
+					m.rows[i] = new Array(0, 0, 0, 0, 0);
+				}								
+                document.body.appendChild( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );
+				addCellHandlers("tableId");
+				
+				//document.body.setChild( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );
+                // make IE update display
+                if ( navigator.userAgent.toLowerCase().indexOf("msie") != -1 && !window.opera ) {
+                    document.body.innerHTML = document.body.innerHTML;
+                }
+            };
+        </script>
+</html>
