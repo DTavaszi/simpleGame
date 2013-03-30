@@ -61,29 +61,28 @@
 					var currentRow = table.rows[i].getElementsByTagName("td");					
 					for (j = 0; j < currentRow.length; j++)
 					{
-						currentRow[j].onclick = crossOrNot(currentRow[j], table);						
+						currentRow[j].onclick = (function () {													
+													 crossOrNot(this);													 
+													 checkGame(table);
+													});						
 					}
 				}
 			}
-			function crossOrNot(cell, table) {
-				return function() {
-					if (cell.innerHTML === "X"){				
-						cell.innerHTML = 0;				
-						}
-					else {
-						cell.innerHTML = "X";
-						}
-						//alert(tId);
-					checkGame(table);
+			function crossOrNot(cell) {			
+				if (cell.innerHTML === "X"){				
+					cell.innerHTML = 0;				
+				}
+				else {
+					cell.innerHTML = "X";
 				}
 			}
-			function checkGame(table) {
 			
+			function checkGame(table) {			
 					var rows = table.getElementsByTagName("tr");
 					for (i = 0; i < rows.length; i++) {
-						var currentRow = table.rows[i];
+						var currentRow = table.rows[i].getElementsByTagName("td");
 						
-						if(currentRow[0] === "X")
+						if(currentRow[0].innerHTML, currentRow[1].innerHTML === "X")
 						{
 							alert("endgame");
 						}
