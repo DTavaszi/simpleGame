@@ -73,19 +73,77 @@
 			}
 			
 			function checkGame(table) {			
-					var rows = table.getElementsByTagName("tr");
-					var cLength = rows.length;
+					var n = 5; //table size, nxn matrix
 					var x = 2; //Number of X's that have to be adjacent (2 means 3 X's)
-					for (j = 0; j < cLength - x; j++)
+					
+					//Retrieve rows	
+					var rows = new Array();								
+					for (i = 0; i < n; i++) {	
+						rows[i] = table.rows[i].getElementsByTagName("td");						
+					}
+					
+					/* Check if
+					** X X X
+					*/
+					for (j = 0; j < n; j++)
 					{					
-						for (i = 0; i < rows.length - x; i++) {						
-							var currentRow = table.rows[j].getElementsByTagName("td");
-							
-							if(currentRow[i].innerHTML && currentRow[i+1].innerHTML && currentRow[i+2].innerHTML === "X")
+						for (i = 0; i < n - x; i++) {													
+							if(rows[j][i].innerHTML === "X" && rows[j][i+1].innerHTML == "X" && rows[j][i+2].innerHTML == "X")
 							{
-								alert("endgame");
+								turnYellow([rows[j][i], rows[j][i+1], rows[j][i+2]], "Blue");
 							}
 						}
+					}
+					/* Check if
+					** X
+					** X
+					** X
+					*/ 
+					for (j = 0; j < n; j++)
+					{					
+						for (i = 0; i < n - x; i++) {						
+							
+							if(rows[i][j].innerHTML === "X" && rows[i+1][j].innerHTML == "X" && rows[i+2][j].innerHTML == "X")
+							{
+								turnYellow([rows[i][j], rows[j+1][j], rows[i+2][j]], "Red");
+							}
+						}
+					}
+					/* Check if
+					** X
+					**  X
+					**   X
+					*/ 
+					for (j = 0; j < n - x; j++)
+					{					
+						for (i = 0; i < n - x; i++) {						
+							
+							if(rows[i][j].innerHTML === "X" && rows[i+1][j+1].innerHTML == "X" && rows[i+2][j+2].innerHTML == "X")
+							{
+								turnYellow([rows[i][j], rows[i+1][j+1], rows[i+2][j+2]], "Purple");
+							}
+						}
+					}
+					/* Check if
+					**   X
+					**  X
+					** X
+					*/
+					for (j = 0; j < n-2; j++)
+					{					
+						for (i = n-1; i > x-1; i--) {						
+							
+							if(rows[j][i].innerHTML === "X" && rows[j+1][i-1].innerHTML == "X" && rows[j+2][i-2].innerHTML == "X")
+							{
+								turnYellow([rows[j][i], rows[j+1][i-1], rows[j+2][i-2]], "Yellow");
+								
+							}
+						}
+					}
+					function turnYellow(rows, color){
+					 rows[0].bgColor = color;
+					 rows[1].bgColor = color;
+					 rows[2].bgColor = color;
 					}
 				}
             window.onload = function() {
