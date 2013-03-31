@@ -14,7 +14,8 @@
         <h1>Hello, world!</h1>
         <p>Color the map such that no two adjacent tiles have the same color (excluding diagonal tiles).
 		There are four colors you can create.</p>
-        <p><a href="#" class="btn btn-primary btn-large" id="start">Start &raquo;</a></p>
+        <p><a href="#" class="btn btn-primary btn-large" id="restart">Start</a> <a href="PuzzleKey.jpg" class="btn btn-primary btn-large" id="example">Example &raquo;</a></p>
+		<p></p>
 		<div class="simpleGame" id="simpleGame"/>
       </div>
 		
@@ -222,16 +223,19 @@
 					m.rows[i] = new Array(0, 0, 0, 0, 0);
 				}								
                 //document.body.appendChild( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );
-				document.getElementById("simpleGame").insertBefore( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );			
-				document.getElementById("simpleGame").style.display="none";
+				document.getElementById("simpleGame").insertBefore( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );
+				addCellHandlers("tableId");					
+				//$("#simpleGame").hide();
                 // make IE update display
                 if ( navigator.userAgent.toLowerCase().indexOf("msie") != -1 && !window.opera ) {
                     document.body.innerHTML = document.body.innerHTML;
                 }
             };
-			$("#start").click(function () {
-					addCellHandlers("tableId");	
-					$("#simpleGame").fadeIn(2000);
+			$("#restart").click(function () {
+					location.reload();
+					
+					
+					//$("#simpleGame").fadeIn(2000);
 			});
         </script>
 </html>
