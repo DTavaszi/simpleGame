@@ -1,4 +1,6 @@
 .container {
-	width: 50%;
-	margin:150px auto;
+	margin:10px auto;
 }
+.simpleGame{
+	margin:0px auto;
+	width:50%;}

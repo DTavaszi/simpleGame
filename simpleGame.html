@@ -4,11 +4,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>JS Matrices</title>
         <link href="css/style.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
     </head>
     <body>
-		<div class="container" id="c">
+		<div class="container">
+		
+		
+		<div class="hero-unit">
+        <h1>Hello, world!</h1>
+        <p>Color the map such that no two adjacent tiles have the same color (excluding diagonal tiles).
+		There are four colors you can create.</p>
+        <p><a href="#" class="btn btn-primary btn-large" id="start">Start &raquo;</a></p>
+		<div class="simpleGame" id="simpleGame"/>
+      </div>
+		
 		</div>
     </body>
+	<script src="js/jquery-1.9.1.js"></script>
 	<script type="text/javascript">
         //<![CDATA[
             function Matrix() {
@@ -55,7 +67,7 @@
                     return table;
                 };
             }
-			function addCellHandlers(tId, fClickHandler) {			
+			function addCellHandlers(tId, fClickHandler) {			//Fix
 				var table = document.getElementById(tId);
 				var rows = table.getElementsByTagName("tr");
 				for (i = 0; i < rows.length; i++) {
@@ -210,12 +222,16 @@
 					m.rows[i] = new Array(0, 0, 0, 0, 0);
 				}								
                 //document.body.appendChild( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );
-				document.getElementById("c").appendChild( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );			
-				addCellHandlers("tableId");			
+				document.getElementById("simpleGame").insertBefore( m.asTableElement( "300px", "300px", "simpleGame", 5, 5, 5, "center" ) );			
+				document.getElementById("simpleGame").style.display="none";
                 // make IE update display
                 if ( navigator.userAgent.toLowerCase().indexOf("msie") != -1 && !window.opera ) {
                     document.body.innerHTML = document.body.innerHTML;
                 }
             };
+			$("#start").click(function () {
+					addCellHandlers("tableId");	
+					$("#simpleGame").fadeIn(2000);
+			});
         </script>
 </html>
