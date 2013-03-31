@@ -90,10 +90,10 @@
 						for (i = 0; i < n - x; i++) {													
 							if(rows[j][i].innerHTML === "X" && rows[j][i+1].innerHTML == "X" && rows[j][i+2].innerHTML == "X")
 							{
-								turnYellow([rows[j][i], rows[j][i+1], rows[j][i+2]], "Blue");
+								turnColor([rows[j][i], rows[j][i+1], rows[j][i+2]], "Blue");
 							}
 						}
-					}
+					}					
 					/* Check if
 					** X
 					** X
@@ -105,7 +105,7 @@
 							
 							if(rows[i][j].innerHTML === "X" && rows[i+1][j].innerHTML == "X" && rows[i+2][j].innerHTML == "X")
 							{
-								turnYellow([rows[i][j], rows[i+1][j], rows[i+2][j]], "Red");
+								turnColor([rows[i][j], rows[i+1][j], rows[i+2][j]], "Red");
 							}
 						}
 					}
@@ -120,7 +120,7 @@
 							
 							if(rows[i][j].innerHTML === "X" && rows[i+1][j+1].innerHTML == "X" && rows[i+2][j+2].innerHTML == "X")
 							{
-								turnYellow([rows[i][j], rows[i+1][j+1], rows[i+2][j+2]], "Purple");
+								turnColor([rows[i][j], rows[i+1][j+1], rows[i+2][j+2]], "Purple");
 							}
 						}
 					}
@@ -135,12 +135,29 @@
 							
 							if(rows[j][i].innerHTML === "X" && rows[j+1][i-1].innerHTML == "X" && rows[j+2][i-2].innerHTML == "X")
 							{
-								turnYellow([rows[j][i], rows[j+1][i-1], rows[j+2][i-2]], "Yellow");
+								turnColor([rows[j][i], rows[j+1][i-1], rows[j+2][i-2]], "Yellow");
 								
 							}
 						}
 					}
-					function turnYellow(rows, color){
+					/* Check if
+					**   X
+					**  X
+					** X
+					*/
+					for (j = 0; j < n-2; j++)
+					{					
+						for (i = n-1; i > x-1; i--) {						
+							
+							if(rows[j][i].innerHTML === "X" && rows[j+1][i-1].innerHTML == "X" && rows[j+2][i-2].innerHTML == "X")
+							{
+								turnColor([rows[j][i], rows[j+1][i-1], rows[j+2][i-2]], "Yellow");
+								
+							}
+						}
+					}				
+					
+					function turnColor(rows, color){
 					 rows[0].bgColor = color;
 					 rows[1].bgColor = color;
 					 rows[2].bgColor = color;
