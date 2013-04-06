@@ -17,7 +17,10 @@
         <p><a href="#" class="btn btn-primary btn-large" id="restart">Start</a> <a href="PuzzleKey.jpg" class="btn btn-primary btn-large" id="example">Example &raquo;</a></p>
 		<p></p>
 		<div class="simpleGame" id="simpleGame"/>
-      </div>
+		<FORM NAME="tic">
+		<INPUT TYPE="button" NAME="sqr1" value="     " onClick="if(document.tic.sqr1.value == '     ' && turn == 0 && mode == 1) {document.tic.sqr1.value = ' X '; sqr1T = 1; turn = 1; vari(); check();} else if(document.tic.sqr1.value == '     ' && turn == 1 && mode == 2) {document.tic.sqr1.value = ' X '; sqr1T = 1; turn = 0; vari(); player1Check()} else if(document.tic.sqr1.value == '     ' && turn == 0 && mode == 2) {document.tic.sqr1.value = ' O '; sqr1T = 1; turn = 1; vari(); player1Check()} drawCheck()">
+		</form>
+	  </div>
 		
 		</div>
     </body>
@@ -68,7 +71,7 @@
                     return table;
                 };
             }
-			function addCellHandlers(tId, fClickHandler) {			//Fix
+			function addCellHandlers(tId) {			//Fix
 				var table = document.getElementById(tId);
 				var rows = table.getElementsByTagName("tr");
 				for (i = 0; i < rows.length; i++) {
